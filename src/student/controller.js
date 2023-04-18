@@ -4,8 +4,8 @@ const pool = require("../../db");
 const queries = require("./queries");
 
 //helping me to find out what is queries
-console.log(typeof queries);
-console.log(queries);
+// console.log(typeof queries);
+// console.log(queries);
 
 function getStudents(req, res) {
   pool.query(queries.getStudents, (error, results) => {

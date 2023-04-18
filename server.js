@@ -13,8 +13,13 @@ const port = 3000;
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "src", "student")));
 
+// app.get("/", (req, res) => {
+//   res.send("Hello world");
+// });
+
+// add path to index
 app.get("/", (req, res) => {
-  res.send("Hello world");
+  res.sendFile(path.join(__dirname, "index.html"));
 });
 
 app.use("/api/v1/students", studentRoutes);
