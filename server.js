@@ -11,6 +11,9 @@ const port = 3000;
 //console.log(typeof express);
 
 app.use(express.json());
+//add static files
+app.use(express.static(path.join(__dirname, "public")));
+
 app.use(express.static(path.join(__dirname, "src", "student")));
 
 // app.get("/", (req, res) => {

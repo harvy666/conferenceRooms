@@ -3,7 +3,7 @@
 // document.querySelector(".btn-press").addEventListener("click");
 
 //import { getStudents } from "./controller";
-import { getStudents } from "./src/student/controller";
+import { getStudents } from "../src/student/controller";
 
 let button = document.querySelector(".btn-press");
 button.addEventListener("click", () => {
