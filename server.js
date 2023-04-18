@@ -1,7 +1,7 @@
 //controller feletti réteg?
 
 const express = require("express");
-const studentRoutes = require("./src/student/routes");
+const studentRoutes = require("./public/routes");
 const path = require("path");
 
 const app = express();

@@ -1,6 +1,6 @@
 //service réteg business logiccal? (even tho its called controller...)
 
-const pool = require("../../db");
+const pool = require("../db");
 const queries = require("./queries");
 
 //helping me to find out what is queries
