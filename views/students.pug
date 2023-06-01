@@ -1,22 +1,40 @@
 //extends layout
 
-block content
-  h1 Students
 
-  table
-    thead
-      tr
-        th Id
-        th Name
-        th Email
-        th Age
-        th Dob
+html
+  head
+    title Flatpickr Example
+    link(rel='stylesheet', href='https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css')
+    script(src='https://cdn.jsdelivr.net/npm/flatpickr')
+  body
+    
+    input#datepicker(type='text',placeholder="Select date")
+    script.
+      const input = document.querySelector('#datepicker');
+      const maxDate = new Date();
+      maxDate.setDate(maxDate.getDate() + 7);
+      flatpickr(input, {
+        minDate: 'today',
+        maxDate: maxDate,
+      });
 
-    tbody
-      each student in students
+
+    h1 Students
+
+    table
+      thead
         tr
-            td= student.id
-            td= student.name
-            td= student.email
-            td= student.age
-            td= student.dob
+          th Id
+          th Name
+          th Email
+          th Age
+          th Dob
+
+      tbody
+        each student in students
+          tr
+              td= student.id
+              td= student.name
+              td= student.email
+              td= student.age
+              td= student.dob
