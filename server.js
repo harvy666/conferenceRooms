@@ -32,16 +32,3 @@ app.get("/students", async (req, res) => {
   const result = await pool.query(queries.getStudents);
   res.render("students", { students: result.rows });
 });
-
-app.get("/users", async (req, res) => {
-  try {
-    const client = await pool.connect();
-    const result = await client.query(queries.getStudents);
-    const users = result.rows;
-    client.release(); // release the client back to the pool
-    res.render("users", { users });
-  } catch (err) {
-    console.error(err);
-    res.render("error", { error: err });
-  }
-});
