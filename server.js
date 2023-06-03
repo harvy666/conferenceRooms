@@ -23,12 +23,13 @@ app.use("/", studentRoutes);
 app.listen(port, () => console.log(`app listening on port ${port}`));
 
 //////////////
-//prints all students from Postgres to /students endpoint (using a PUG in views folder)
+//prints all rooms from Postgres to /rooms endpoint (using a PUG in views folder)
 
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
 
 app.get("/rooms", async (req, res) => {
   const result = await pool.query(queries.getRooms);
+  console.log(result);
   res.render("rooms", { rooms: result.rows });
 });
