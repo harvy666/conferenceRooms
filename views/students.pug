@@ -8,35 +8,53 @@ html
     script(src='https://cdn.jsdelivr.net/npm/flatpickr')
   body
     <h2>Select date:</h2>
-    
+
     input#datepicker(type='text',placeholder="Select date")
     script.
       const input = document.querySelector('#datepicker');
       const maxDate = new Date();
       maxDate.setDate(maxDate.getDate() + 7);
       flatpickr(input, {
-        defaultDate: 'today',
+        //defaultDate: 'today',
         minDate: 'today',
         maxDate: maxDate,
+        onChange: function(selectedDates, dateStr, instance) {
+        console.log("Hello from flat")
+        console.log("Selected date:", selectedDates[0]);
+        console.log("Formatted date string:", dateStr);
+        console.log("Flatpickr instance:", instance);
+        
+        }
       });
 
 
-    h1 Students
 
-    table
-      thead
-        tr
-          th Id
-          th Name
-          th Email
-          th Age
-          th Dob
+    h1 Rooms
 
-      tbody
-        each student in students
-          tr
-              td= student.id
-              td= student.name
-              td= student.email
-              td= student.age
-              td= student.dob
+    <input type="checkbox" id="room1" name="room1" >
+    <label for="room1"> Room 1</label><br>
+    <input type="checkbox" id="room2" name="room2" >
+    <label for="room2">Room 2</label><br>
+    <input type="checkbox" id="room3" name="room3" >
+    <label for="room3"> Room 3</label><br>
+    <input type="checkbox" id="room4" name="room4" >
+    <label for="room4">Room 4</label><br>
+
+
+    //- table
+    //-   thead
+    //-     tr
+    //-       th Id
+    //-       th Name
+    //-       th Email
+    //-       th Age
+    //-       th Dob
+
+    //-   tbody
+    //-     each student in students
+    //-       tr
+    //-         td= student.id
+    //-         td= student.name
+    //-         td= student.email
+    //-         td= student.age
+    //-         td= student.dob
