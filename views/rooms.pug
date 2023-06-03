@@ -30,7 +30,7 @@ html
 
 
     h1 Rooms
-    <form id="roomsForm">
+    <form id="roomsForm" action="/save", method="post" >
       <input type="checkbox" id="room1Cb" name="room1Cb" >
       <label for="roomCb1"> Room 1</label><br>
       <input type="checkbox" id="room2Cb" name="room2Cb" >
@@ -39,6 +39,7 @@ html
       <label for="room3Cb"> Room 3</label><br>
       <input type="checkbox" id="room4Cb" name="room4Cb" >
       <label for="room4Cb">Room 4</label><br>
+      button(type="submit") Save
     </form>
 
 
