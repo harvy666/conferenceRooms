@@ -28,8 +28,10 @@ app.listen(port, () => console.log(`app listening on port ${port}`));
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
 
+//give all rooms to the PUG so I can search in them later with the selected date on the datepicker
 app.get("/rooms", async (req, res) => {
   const result = await pool.query(queries.getRooms);
   console.log(result);
+  console.log("-------------end of  all rooms query------------------");
   res.render("rooms", { rooms: result.rows });
 });
