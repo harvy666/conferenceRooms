@@ -44,13 +44,28 @@ app.post("/rooms", (req, res) => {
   const checkbox3 = req.body.room3Cb;
   const checkbox4 = req.body.room4Cb;
 
-  console.log("1es cb");
-  console.log(res.body);
-  console.log("1es cb vége-----------------------------------------");
+  const currentDate = Date.now();
+
+  // Get the current timestamp using Date.now()
+  const timestamp = Date.now();
+
+  // Convert the timestamp to a PostgreSQL timestamp value
+  const postgresTimestamp = new Date(timestamp);
+  const postgresTimestampString = postgresTimestamp.toISOString();
+
+  // Extract only the date part from the timestamp value
+  const postgresDate = postgresTimestampString.substring(0, 10);
+  const [year, month, day] = postgresDate.split("-");
+  const postgresDateExpression = `to_date('${year}-${month}-${day}', 'YYYY-MM-DD')`;
+
+  const sqlQuery = `INSERT INTO rooms (reservation_date,room1,room2,room3,room4) VALUES (${postgresDateExpression},$1,$2,$3,$4)`;
+
+  console.log(postgresDate); // Output: YYYY-MM-DD
 
   //hogy mukodik ez a pool.query, mi kell a szögletes zarojelbe ha kell e egyaltalan...
+  //TODO
   pool.query(
-    "INSERT INTO rooms (room1,room2,room3,room4) VALUES ($1,$2,$3,$4)",
+    sqlQuery,
     [checkbox1, checkbox2, checkbox3, checkbox4],
     (error, results) => {
       if (error) {
@@ -61,8 +76,4 @@ app.post("/rooms", (req, res) => {
       }
     }
   );
-
-  console.log("THE END");
-  console.log(res.body);
-  console.log("THE END");
 });
