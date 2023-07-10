@@ -31,8 +31,8 @@ app.set("views", path.join(__dirname, "views"));
 //give all rooms to the PUG so I can search in them later with the selected date on the datepicker
 app.get("/rooms", async (req, res) => {
   const result = await pool.query(queries.getRooms);
-  console.log(result);
-  console.log("-------------end of  all rooms query------------------");
+  // console.log(result);
+  // console.log("-------------end of  all rooms query------------------");
   res.render("rooms", { rooms: result.rows });
 });
 
@@ -44,9 +44,13 @@ app.post("/rooms", (req, res) => {
   const checkbox3 = req.body.room3Cb;
   const checkbox4 = req.body.room4Cb;
 
+  console.log("1es cb");
+  console.log(res.body);
+  console.log("1es cb vége-----------------------------------------");
+
   //hogy mukodik ez a pool.query, mi kell a szögletes zarojelbe ha kell e egyaltalan...
   pool.query(
-    "INSERT INTO rooms (room1,room2,room3,room4) VALUES (checkbox1,checkbox2,checkbox3,checkbox4)",
+    "INSERT INTO rooms (room1,room2,room3,room4) VALUES ($1,$2,$3,$4)",
     [checkbox1, checkbox2, checkbox3, checkbox4],
     (error, results) => {
       if (error) {
@@ -57,4 +61,8 @@ app.post("/rooms", (req, res) => {
       }
     }
   );
+
+  console.log("THE END");
+  console.log(res.body);
+  console.log("THE END");
 });
