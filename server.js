@@ -35,3 +35,26 @@ app.get("/rooms", async (req, res) => {
   console.log("-------------end of  all rooms query------------------");
   res.render("rooms", { rooms: result.rows });
 });
+
+//saving the checkboxes?
+
+app.post("/rooms", (req, res) => {
+  const checkbox1 = req.body.room1Cb;
+  const checkbox2 = req.body.room2Cb;
+  const checkbox3 = req.body.room3Cb;
+  const checkbox4 = req.body.room4Cb;
+
+  //hogy mukodik ez a pool.query, mi kell a szögletes zarojelbe ha kell e egyaltalan...
+  pool.query(
+    "INSERT INTO rooms (room1,room2,room3,room4) VALUES (checkbox1,checkbox2,checkbox3,checkbox4)",
+    [checkbox1, checkbox2, checkbox3, checkbox4],
+    (error, results) => {
+      if (error) {
+        console.error("Error saving checkbox state:", error);
+        res.status(500).send("Error saving checkbox state");
+      } else {
+        res.send("Checkbox state saved successfully");
+      }
+    }
+  );
+});
