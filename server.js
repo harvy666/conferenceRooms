@@ -61,9 +61,12 @@ app.post("/rooms", (req, res) => {
   const sqlQuery = `INSERT INTO rooms (reservation_date,room1,room2,room3,room4) VALUES (${postgresDateExpression},$1,$2,$3,$4)`;
 
   console.log(postgresDate); // Output: YYYY-MM-DD
+  //TODO undefined mind a 4 checkbox mashogy kell oket behuzni
+  console.log(checkbox1);
+  console.log(checkbox2);
+  console.log(checkbox3);
+  console.log(checkbox4);
 
-  //hogy mukodik ez a pool.query, mi kell a szögletes zarojelbe ha kell e egyaltalan...
-  //TODO
   pool.query(
     sqlQuery,
     [checkbox1, checkbox2, checkbox3, checkbox4],
