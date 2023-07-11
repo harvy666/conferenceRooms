@@ -41,9 +41,6 @@ app.get("/rooms", async (req, res) => {
 app.post("/rooms", (req, res) => {
   const { room1Cb, room2Cb, room3Cb, room4Cb } = req.body;
 
-  console.log("Room1");
-  console.log(room1Cb);
-
   const currentDate = Date.now();
 
   // Get the current timestamp using Date.now()

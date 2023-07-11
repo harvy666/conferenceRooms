@@ -15,8 +15,6 @@ const formattedDate = `${year}-${month}-${day}`;
 
 let simpleDate;
 flatpickr(input, {
-  //defaultDate: 'today',
-
   locale: {
     firstDayOfWeek: 1,
   },
@@ -53,8 +51,6 @@ document.addEventListener("DOMContentLoaded", () => {
       room3Cb,
       room4Cb,
     };
-
-    console.log(formData);
 
     // Send the form data to the server
     fetch("/rooms", {
