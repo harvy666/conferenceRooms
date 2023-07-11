@@ -73,28 +73,3 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   });
 });
-
-// document.addEventListener("DOMContentLoaded", () => {
-//   const form = document.getElementById("roomsForm");
-
-//   form.addEventListener("submit", (event) => {
-//     event.preventDefault(); // Prevent default form submission
-//     console.log("Form works----------");
-
-//     // Fetch checkbox values
-//     const room1Cb = document.getElementById("room1Cb").checked;
-//     const room2Cb = document.getElementById("room2Cb").checked;
-//     const room3Cb = document.getElementById("room3Cb").checked;
-//     const room4Cb = document.getElementById("room4Cb").checked;
-
-//     // Prepare the data to send
-//     const formData = {
-//       room1Cb,
-//       room2Cb,
-//       room3Cb,
-//       room4Cb,
-//     };
-
-//     console.log(formData);
-//   });
-// });

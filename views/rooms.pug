@@ -10,29 +10,7 @@ html
     input#datepicker(type='text',placeholder="Select date")
     script(src='script.js')
 
-    //- input#datepicker(type='text',placeholder="Select date")
-    //- script.
-    //-   const input = document.querySelector('#datepicker');
-    //-   const maxDate = new Date();
-    //-   maxDate.setDate(maxDate.getDate() + 7);
-    //-   flatpickr(input, {
-    //-     //defaultDate: 'today',
-    //-     minDate: 'today',
-    //-     maxDate: maxDate,
-    //-     onChange: function(selectedDates, dateStr, instance) {
-    //-     console.log("Hello from flat")
-    //-     console.log("Selected date:", selectedDates[0]);
-    //-     console.log("Formatted date string:", dateStr);
-    //-     console.log("Flatpickr instance:", instance);
-        
-    //-     }
-    //-   });
-
     
-  
-
-
-
     h1 Rooms
     <form id="roomsForm" action="/rooms", method="POST" >
       <input type="checkbox" id="room1Cb" name="room1Cb" >
@@ -48,20 +26,3 @@ html
 
   
 
-    //- table
-    //-   thead
-    //-     tr
-    //-       th Date
-    //-       th Room1
-    //-       th Room2
-    //-       th Room3
-    //-       th Room4
-
-    //-   tbody
-    //-     each room in rooms
-    //-       tr
-    //-         td= room.reservation_date
-    //-         td= room.room1
-    //-         td= room.room2
-    //-         td= room.room3
-    //-         td= room.room4

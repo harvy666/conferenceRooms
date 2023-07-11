@@ -39,10 +39,6 @@ app.get("/rooms", async (req, res) => {
 //saving the checkboxes?
 
 app.post("/rooms", (req, res) => {
-  // const checkbox1 = req.body.room1Cb;
-  // const checkbox2 = req.body.room2Cb;
-  // const checkbox3 = req.body.room3Cb;
-  // const checkbox4 = req.body.room4Cb;
   const { room1Cb, room2Cb, room3Cb, room4Cb } = req.body;
 
   console.log("Room1");
@@ -65,11 +61,6 @@ app.post("/rooms", (req, res) => {
   const sqlQuery = `INSERT INTO rooms (reservation_date,room1,room2,room3,room4) VALUES (${postgresDateExpression},$1,$2,$3,$4)`;
 
   console.log(postgresDate); // Output: YYYY-MM-DD
-  //TODO undefined mind a 4 checkbox mashogy kell oket behuzni
-  // console.log(checkbox1);
-  // console.log(checkbox2);
-  // console.log(checkbox3);
-  // console.log(checkbox4);
 
   pool.query(
     sqlQuery,
