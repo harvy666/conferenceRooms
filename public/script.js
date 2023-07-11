@@ -33,3 +33,68 @@ flatpickr(input, {
     } else console.log("Nem ma van :(");
   },
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("roomsForm");
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault(); // Prevent default form submission
+
+    // Fetch checkbox values
+    const room1Cb = document.getElementById("room1Cb").checked;
+    const room2Cb = document.getElementById("room2Cb").checked;
+    const room3Cb = document.getElementById("room3Cb").checked;
+    const room4Cb = document.getElementById("room4Cb").checked;
+
+    // Prepare the data to send
+    const formData = {
+      room1Cb,
+      room2Cb,
+      room3Cb,
+      room4Cb,
+    };
+
+    console.log(formData);
+
+    // Send the form data to the server
+    fetch("/rooms", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => response.text())
+      .then((data) => {
+        console.log(data); // Success message from the server
+      })
+      .catch((error) => {
+        console.error("Error saving checkbox state:", error);
+      });
+  });
+});
+
+// document.addEventListener("DOMContentLoaded", () => {
+//   const form = document.getElementById("roomsForm");
+
+//   form.addEventListener("submit", (event) => {
+//     event.preventDefault(); // Prevent default form submission
+//     console.log("Form works----------");
+
+//     // Fetch checkbox values
+//     const room1Cb = document.getElementById("room1Cb").checked;
+//     const room2Cb = document.getElementById("room2Cb").checked;
+//     const room3Cb = document.getElementById("room3Cb").checked;
+//     const room4Cb = document.getElementById("room4Cb").checked;
+
+//     // Prepare the data to send
+//     const formData = {
+//       room1Cb,
+//       room2Cb,
+//       room3Cb,
+//       room4Cb,
+//     };
+
+//     console.log(formData);
+//   });
+// });

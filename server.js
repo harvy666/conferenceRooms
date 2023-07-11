@@ -39,10 +39,14 @@ app.get("/rooms", async (req, res) => {
 //saving the checkboxes?
 
 app.post("/rooms", (req, res) => {
-  const checkbox1 = req.body.room1Cb;
-  const checkbox2 = req.body.room2Cb;
-  const checkbox3 = req.body.room3Cb;
-  const checkbox4 = req.body.room4Cb;
+  // const checkbox1 = req.body.room1Cb;
+  // const checkbox2 = req.body.room2Cb;
+  // const checkbox3 = req.body.room3Cb;
+  // const checkbox4 = req.body.room4Cb;
+  const { room1Cb, room2Cb, room3Cb, room4Cb } = req.body;
+
+  console.log("Room1");
+  console.log(room1Cb);
 
   const currentDate = Date.now();
 
@@ -62,14 +66,14 @@ app.post("/rooms", (req, res) => {
 
   console.log(postgresDate); // Output: YYYY-MM-DD
   //TODO undefined mind a 4 checkbox mashogy kell oket behuzni
-  console.log(checkbox1);
-  console.log(checkbox2);
-  console.log(checkbox3);
-  console.log(checkbox4);
+  // console.log(checkbox1);
+  // console.log(checkbox2);
+  // console.log(checkbox3);
+  // console.log(checkbox4);
 
   pool.query(
     sqlQuery,
-    [checkbox1, checkbox2, checkbox3, checkbox4],
+    [room1Cb, room2Cb, room3Cb, room4Cb],
     (error, results) => {
       if (error) {
         console.error("Error saving checkbox state:", error);
