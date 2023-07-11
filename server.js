@@ -55,7 +55,10 @@ app.post("/rooms", (req, res) => {
   const [year, month, day] = postgresDate.split("-");
   const postgresDateExpression = `to_date('${year}-${month}-${day}', 'YYYY-MM-DD')`;
 
-  const sqlQuery = `INSERT INTO rooms (reservation_date,room1,room2,room3,room4) VALUES (${postgresDateExpression},$1,$2,$3,$4)`;
+  const sqlQuery = `INSERT INTO rooms (reservation_date,room1,room2,room3,room4) VALUES (${postgresDateExpression},$1,$2,$3,$4)
+  ON CONFLICT (reservation_date)
+  DO UPDATE SET room1 = $1, room2 = $2, room3 = $3, room4 = $4
+  `;
 
   console.log(postgresDate); // Output: YYYY-MM-DD
 
