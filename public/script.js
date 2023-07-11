@@ -31,21 +31,17 @@ flatpickr(input, {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("roomsForm");
+  let form = document.getElementById("roomsForm");
 
   form.addEventListener("submit", (event) => {
     event.preventDefault(); // Prevent default form submission
 
     // Fetch checkbox values
-    const room1Cb = document.getElementById("room1Cb").checked;
-    const room2Cb = document.getElementById("room2Cb").checked;
-    const room3Cb = document.getElementById("room3Cb").checked;
-    const room4Cb = document.getElementById("room4Cb").checked;
 
     const selectedDate = document.getElementById("datepicker").value;
 
     // Prepare the data to send
-    const formData = {
+    let formData = {
       room1Cb,
       room2Cb,
       room3Cb,
