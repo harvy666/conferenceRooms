@@ -21,8 +21,6 @@ flatpickr(input, {
   minDate: "today",
   maxDate: maxDate,
   onChange: function (selectedDates, dateStr, instance) {
-    console.log("Hello from flat");
-    console.log("Selected date:", selectedDates[0]);
     simpleDate = dateStr;
     console.log("Formatted date string:", simpleDate);
     //testing date in datepicker
@@ -44,12 +42,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const room3Cb = document.getElementById("room3Cb").checked;
     const room4Cb = document.getElementById("room4Cb").checked;
 
+    const selectedDate = document.getElementById("datepicker").value;
+
     // Prepare the data to send
     const formData = {
       room1Cb,
       room2Cb,
       room3Cb,
       room4Cb,
+      selectedDate,
     };
 
     // Send the form data to the server

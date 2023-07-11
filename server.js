@@ -39,32 +39,37 @@ app.get("/rooms", async (req, res) => {
 //saving the checkboxes?
 
 app.post("/rooms", (req, res) => {
-  const { room1Cb, room2Cb, room3Cb, room4Cb } = req.body;
+  const { selectedDate, room1Cb, room2Cb, room3Cb, room4Cb } = req.body;
 
-  const currentDate = Date.now();
+  // const currentDate = Date.now();
 
-  // Get the current timestamp using Date.now()
-  const timestamp = Date.now();
+  // // Get the current timestamp using Date.now()
+  // const timestamp = Date.now();
 
-  // Convert the timestamp to a PostgreSQL timestamp value
-  const postgresTimestamp = new Date(timestamp);
-  const postgresTimestampString = postgresTimestamp.toISOString();
+  // // Convert the timestamp to a PostgreSQL timestamp value
+  // const postgresTimestamp = new Date(timestamp);
+  // const postgresTimestampString = postgresTimestamp.toISOString();
 
-  // Extract only the date part from the timestamp value
-  const postgresDate = postgresTimestampString.substring(0, 10);
-  const [year, month, day] = postgresDate.split("-");
-  const postgresDateExpression = `to_date('${year}-${month}-${day}', 'YYYY-MM-DD')`;
+  // // Extract only the date part from the timestamp value
+  // const postgresDate = postgresTimestampString.substring(0, 10);
+  // const [year, month, day] = postgresDate.split("-");
+  // const postgresDateExpression = `to_date('${year}-${month}-${day}', 'YYYY-MM-DD')`;
 
-  const sqlQuery = `INSERT INTO rooms (reservation_date,room1,room2,room3,room4) VALUES (${postgresDateExpression},$1,$2,$3,$4)
+  // // const sqlQuery = `INSERT INTO rooms (reservation_date,room1,room2,room3,room4) VALUES (${postgresDateExpression},$1,$2,$3,$4)
+  // // ON CONFLICT (reservation_date)
+  // // DO UPDATE SET room1 = $1, room2 = $2, room3 = $3, room4 = $4
+  // // `;
+
+  const sqlQuery = `INSERT INTO rooms (reservation_date,room1,room2,room3,room4) VALUES ($1,$2,$3,$4,$5)
   ON CONFLICT (reservation_date)
-  DO UPDATE SET room1 = $1, room2 = $2, room3 = $3, room4 = $4
+  DO UPDATE SET room1 = $2, room2 = $3, room3 = $4, room4 = $5
   `;
 
-  console.log(postgresDate); // Output: YYYY-MM-DD
+  console.log(selectedDate); // Output: YYYY-MM-DD
 
   pool.query(
     sqlQuery,
-    [room1Cb, room2Cb, room3Cb, room4Cb],
+    [selectedDate, room1Cb, room2Cb, room3Cb, room4Cb],
     (error, results) => {
       if (error) {
         console.error("Error saving checkbox state:", error);
