@@ -1,5 +1,5 @@
 //datepicker code
-let simpleDate;
+//let simpleDate;
 const input = document.querySelector("#datepicker");
 const maxDate = new Date();
 maxDate.setDate(maxDate.getDate() + 7);
@@ -12,7 +12,10 @@ document.addEventListener("DOMContentLoaded", () => {
     minDate: "today",
     maxDate: maxDate,
     onChange: function (selectedDates, dateStr, instance) {
-      simpleDate = dateStr;
+      //simpleDate = dateStr;
+
+      console.log("DateStr");
+      console.log(dateStr);
     },
   });
 
