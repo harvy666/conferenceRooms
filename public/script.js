@@ -14,23 +14,19 @@ const day = String(currentDate.getDate()).padStart(2, "0");
 const formattedDate = `${year}-${month}-${day}`;
 
 let simpleDate;
-flatpickr(input, {
-  locale: {
-    firstDayOfWeek: 1,
-  },
-  minDate: "today",
-  maxDate: maxDate,
-  onChange: function (selectedDates, dateStr, instance) {
-    simpleDate = dateStr;
-    console.log("Formatted date string:", simpleDate);
-    //testing date in datepicker
-    if (formattedDate === simpleDate) {
-      console.log("Ma van!");
-    } else console.log("Nem ma van :(");
-  },
-});
 
 document.addEventListener("DOMContentLoaded", () => {
+  flatpickr(input, {
+    locale: {
+      firstDayOfWeek: 1,
+    },
+    minDate: "today",
+    maxDate: maxDate,
+    onChange: function (selectedDates, dateStr, instance) {
+      simpleDate = dateStr;
+    },
+  });
+
   let form = document.getElementById("roomsForm");
 
   form.addEventListener("submit", (event) => {
