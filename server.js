@@ -29,14 +29,11 @@ app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
 
 //give all rooms to the PUG so I can search in them later with the selected date on the datepicker
-app.get("/rooms", async (req, res) => {
-  const result = await pool.query(queries.getRooms);
-  // console.log(result);
-  // console.log("-------------end of  all rooms query------------------");
-  res.render("rooms", { rooms: result.rows });
+app.get("/rooms", (req, res) => {
+  res.render("rooms");
 });
 
-//saving the checkboxes?
+//saving the checkboxes
 
 app.post("/rooms", (req, res) => {
   const { selectedDate, room1Cb, room2Cb, room3Cb, room4Cb } = req.body;
