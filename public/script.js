@@ -37,6 +37,10 @@ document.addEventListener("DOMContentLoaded", () => {
     event.preventDefault(); // Prevent default form submission
 
     // Fetch checkbox values
+    let room1Cb = document.getElementById("room1Cb").checked;
+    let room2Cb = document.getElementById("room2Cb").checked;
+    let room3Cb = document.getElementById("room3Cb").checked;
+    let room4Cb = document.getElementById("room4Cb").checked;
 
     const selectedDate = document.getElementById("datepicker").value;
 
