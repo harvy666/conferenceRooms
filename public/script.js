@@ -4,6 +4,7 @@ const input = document.querySelector("#datepicker");
 const maxDate = new Date();
 maxDate.setDate(maxDate.getDate() + 7);
 
+//TODO Try to send it to a different page like /form (does not exist currently)?
 document.addEventListener("DOMContentLoaded", () => {
   flatpickr(input, {
     locale: {
@@ -56,5 +57,10 @@ document.addEventListener("DOMContentLoaded", () => {
       .catch((error) => {
         console.error("Error saving checkbox state:", error);
       });
+
+    document.getElementById("room1Cb").checked = false;
+    document.getElementById("room2Cb").checked = false;
+    document.getElementById("room3Cb").checked = false;
+    document.getElementById("room4Cb").checked = false;
   });
 });
