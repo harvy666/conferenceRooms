@@ -42,7 +42,8 @@ app.post("/rooms", (req, res) => {
   DO UPDATE SET room1 = $2, room2 = $3, room3 = $4, room4 = $5
   `;
 
-  console.log(selectedDate); // Output: YYYY-MM-DD
+  // console.log(selectedDate); // Output: YYYY-MM-DD
+  console.log("I was  server!")
 
   pool.query(
     sqlQuery,

@@ -48,6 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
       .then((response) => response.text())
       .then((data) => {
         console.log(data);
+        console.log("I was script!")
       })
       .catch((error) => {
         console.error("Error saving checkbox state:", error);
