@@ -5,6 +5,8 @@ const maxDate = new Date();
 maxDate.setDate(maxDate.getDate() + 7);
 
 //TODO Try to send it to a different page like /form (does not exist currently?)
+
+//FIXME After saving the first room, the week long limit disappers with the cleanup
 document.addEventListener("DOMContentLoaded", () => {
   flatpickr(input, {
     locale: {
