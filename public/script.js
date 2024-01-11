@@ -17,6 +17,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       console.log("DateStr");
       console.log(dateStr);
+      var myDiv = document.getElementById("rooms");
+      myDiv.style.display = "block";
     },
   });
 

@@ -10,8 +10,8 @@ html
     input#datepicker(type='text',placeholder="Select date")
     script(src='script.js')
 
-    
-    h1 Rooms
+  <div id="rooms", style="display: none;">  
+    h1   Rooms
     <form id="roomsForm" action="/rooms", method="POST" >
       <input type="checkbox" id="room1Cb" name="room1Cb" >
       <label for="roomCb1"> Room 1</label><br>
@@ -23,6 +23,6 @@ html
       <label for="room4Cb">Room 4</label><br>
       button(type="submit") Save
     </form>
-
+  </div>
   
 
