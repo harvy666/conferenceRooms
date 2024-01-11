@@ -5,18 +5,24 @@ html
     
     link(rel='stylesheet', href='https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css')
     script(src='https://cdn.jsdelivr.net/npm/flatpickr')
-  body
+  <body>
     <h2>Select date:</h2>
     input#datepicker(type='text',placeholder="Select date")
-    script(src='script.js')
-
+   
   <div id="rooms", style="display: none;">
     
     
     h1   Rooms
     <form id="roomsForm" action="/rooms", method="POST" >
-      //- TODO changeimage is not defined error
-      <img class="rectangle" id="rectangle1" src="red1.jpg" alt="Red Rectangle 1" onclick="changeImage('rectangle1')">  
+      //- TODO link rectangles to checkboxes
+      //- TODO hide checkboxes
+      //- TODO most important: when selecting a date, load existing data showing already reserved rooms
+      <div>
+      <img class="rectangle" id="rectangle1" src="green1.jpg" alt="Green Rectangle 1" onclick="changeImage('rectangle1')"> 
+      <img class="rectangle" id="rectangle2" src="green2.jpg" alt="Green Rectangle 2" onclick="changeImage('rectangle2')"> <br>  
+      <img class="rectangle" id="rectangle3" src="green3.jpg" alt="Green Rectangle 3" onclick="changeImage('rectangle3')">  
+      <img class="rectangle" id="rectangle4" src="green4.jpg" alt="Green Rectangle 4" onclick="changeImage('rectangle4')">  
+      </div>
       <input type="checkbox" id="room1Cb" name="room1Cb" >
       <label for="roomCb1"> Room 1</label><br>
       <input type="checkbox" id="room2Cb" name="room2Cb" >
@@ -28,5 +34,7 @@ html
       button(type="submit") Save
     </form>
   </div>
-  
+
+   script(src='script.js')
+  </body>
 

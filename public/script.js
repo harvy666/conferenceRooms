@@ -22,18 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
     },
   });
 
-  function changeImage(rectangleId) {
-    var image = document.getElementById(rectangleId);
-    var redSource = image.src.replace('green', 'red');
-    var greenSource = image.src.replace('red', 'green');
-
-    if (image.src === redSource) {
-      image.src = greenSource;
-    } else {
-      image.src = redSource;
-    }
-  }
-
+ 
   let form = document.getElementById("roomsForm");
 
   form.addEventListener("submit", (event) => {
@@ -78,3 +67,15 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("room4Cb").checked = false;
   });
 });
+
+function changeImage(rectangleId) {
+  var image = document.getElementById(rectangleId);
+  var redSource = image.src.replace('green', 'red');
+  var greenSource = image.src.replace('red', 'green');
+
+  if (image.src === redSource) {
+    image.src = greenSource;
+  } else {
+    image.src = redSource;
+  }
+}
