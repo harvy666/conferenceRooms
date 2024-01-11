@@ -65,6 +65,9 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("room2Cb").checked = false;
     document.getElementById("room3Cb").checked = false;
     document.getElementById("room4Cb").checked = false;
+    var datePicker = flatpickr("#datePicker");
+    datePicker.clear();
+
   });
 });
 
