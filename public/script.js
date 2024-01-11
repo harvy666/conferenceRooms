@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-function changeImage(rectangleId) {
+function changeImage(rectangleId,checkboxId) {
   var image = document.getElementById(rectangleId);
   var redSource = image.src.replace('green', 'red');
   var greenSource = image.src.replace('red', 'green');
@@ -78,4 +78,7 @@ function changeImage(rectangleId) {
   } else {
     image.src = redSource;
   }
+  // document.getElementById("room1Cb").checked = true
+  var checkbox = document.getElementById(checkboxId);
+        checkbox.checked = !checkbox.checked; 
 }
