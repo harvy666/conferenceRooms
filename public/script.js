@@ -1,5 +1,6 @@
 //datepicker code
 //let simpleDate;
+//TODO delete everything unnecessary
 const input = document.querySelector("#datepicker");
 const maxDate = new Date();
 maxDate.setDate(maxDate.getDate() + 7);
