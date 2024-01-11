@@ -4,33 +4,25 @@ const input = document.querySelector("#datepicker");
 const maxDate = new Date();
 maxDate.setDate(maxDate.getDate() + 7);
 
-//TODO Try to send it to a different page like /form (does not exist currently?)
 
-//FIXME After saving the first room, the week long limit disappers with the cleanup
 document.addEventListener("DOMContentLoaded", () => {
-  flatpickr(input, {
+  let datePicker = flatpickr("#datepicker", {
     locale: {
       firstDayOfWeek: 1,
     },
     minDate: "today",
     maxDate: maxDate,
     onChange: function (selectedDates, dateStr, instance) {
-      //simpleDate = dateStr;
-
-      console.log("DateStr");
-      console.log(dateStr);
       var myDiv = document.getElementById("rooms");
       myDiv.style.display = "block";
     },
   });
 
- 
   let form = document.getElementById("roomsForm");
 
   form.addEventListener("submit", (event) => {
-    event.preventDefault(); // Prevent default form submission
+    event.preventDefault();
 
-    // Fetch checkbox values
     let room1Cb = document.getElementById("room1Cb").checked;
     let room2Cb = document.getElementById("room2Cb").checked;
     let room3Cb = document.getElementById("room3Cb").checked;
@@ -38,7 +30,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const selectedDate = document.getElementById("datepicker").value;
 
-    // Prepare the data to send
     let formData = {
       room1Cb,
       room2Cb,
@@ -47,7 +38,6 @@ document.addEventListener("DOMContentLoaded", () => {
       selectedDate,
     };
 
-    // Send the form data to the server
     fetch("/rooms", {
       method: "POST",
       headers: {
@@ -57,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
     })
       .then((response) => response.text())
       .then((data) => {
-        console.log(data); // Success message from the server
+        console.log(data);
       })
       .catch((error) => {
         console.error("Error saving checkbox state:", error);
@@ -67,23 +57,29 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("room2Cb").checked = false;
     document.getElementById("room3Cb").checked = false;
     document.getElementById("room4Cb").checked = false;
-    var datePicker = flatpickr("#datePicker");
+
+    // Set minDate and maxDate options again after clearing the date picker
+    datePicker.set("minDate", "today");
+    datePicker.set("maxDate", maxDate);
     datePicker.clear();
+
+    var myDiv = document.getElementById("rooms");
+      myDiv.style.display = "none";
 
   });
 });
 
-function changeImage(rectangleId,checkboxId) {
+function changeImage(rectangleId, checkboxId) {
   var image = document.getElementById(rectangleId);
-  var redSource = image.src.replace('green', 'red');
-  var greenSource = image.src.replace('red', 'green');
+  var redSource = image.src.replace("green", "red");
+  var greenSource = image.src.replace("red", "green");
 
   if (image.src === redSource) {
     image.src = greenSource;
   } else {
     image.src = redSource;
   }
-  // document.getElementById("room1Cb").checked = true
+
   var checkbox = document.getElementById(checkboxId);
-        checkbox.checked = !checkbox.checked; 
+  checkbox.checked = !checkbox.checked;
 }
