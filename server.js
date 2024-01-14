@@ -8,19 +8,15 @@ const pool = require("./db");
 const app = express();
 const port = 3000;
 
-// incoming  json parsing (accessible  on the req.body later?)
+// incoming  json parsing (accessible on the req.body later?)
 app.use(express.json());
 //add static files
 app.use(express.static(path.join(__dirname, "public")));
 app.listen(port, () => console.log(`app listening on port ${port}`));
-
-//////////////
 //prints all rooms from Postgres to /rooms endpoint (using a PUG in views folder)
-
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
-
-//give all rooms to the PUG so I can search in them later with the selected date on the datepicker
+//render rooms.pug on /rooms endpoint
 app.get("/rooms", (req, res) => {
   res.render("rooms");
 });
@@ -33,10 +29,8 @@ app.post("/rooms", (req, res) => {
   ON CONFLICT (reservation_date)
   DO UPDATE SET room1 = $2, room2 = $3, room3 = $4, room4 = $5
   `;
-
-  // console.log(selectedDate); // Output: YYYY-MM-DD
+// console.log(selectedDate); // Output: YYYY-MM-DD
   console.log("I was  server!")
-
   pool.query(
     sqlQuery,
     [selectedDate, room1Cb, room2Cb, room3Cb, room4Cb],
