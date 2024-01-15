@@ -16,6 +16,9 @@ document.addEventListener("DOMContentLoaded", () => {
     onChange: function (selectedDates, dateStr, instance) {
       var myDiv = document.getElementById("rooms");
       myDiv.style.display = "block";
+      console.log("Changing!!!")
+
+      //TODO  IF selecteddate not equal 0 then read in the corresponding value from the DB and set checkboxes/images
     },
   });
 
@@ -67,7 +70,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     var myDiv = document.getElementById("rooms");
     myDiv.style.display = "none";
-    resetImage();  
+    resetImage();
+    //TODO reset selectedDate (if it exists here at all) so the onChange it does not fire again
   });
 });
 
