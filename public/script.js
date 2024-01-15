@@ -48,29 +48,22 @@ document.addEventListener("DOMContentLoaded", () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(formData),
-    })
-      .then((response) => response.text())
-      .then((data) => {
-        console.log(data);
-        console.log("I was script!")
-      })
-      .catch((error) => {
-        console.error("Error saving checkbox state:", error);
-      });
+    }).catch((error) => {console.error("Error saving checkbox state:", error);});
 
+    //set stuff back to starting values
     document.getElementById("room1Cb").checked = false;
     document.getElementById("room2Cb").checked = false;
     document.getElementById("room3Cb").checked = false;
     document.getElementById("room4Cb").checked = false;
-
     // Set minDate and maxDate options again after clearing the date picker
     datePicker.set("minDate", "today");
     datePicker.set("maxDate", maxDate);
     datePicker.clear();
-
+    //hide everything again
     var myDiv = document.getElementById("rooms");
     myDiv.style.display = "none";
     resetImage();
+    
     //TODO reset selectedDate (if it exists here at all) so the onChange it does not fire again
   });
 });
