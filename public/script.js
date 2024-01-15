@@ -1,6 +1,6 @@
 //datepicker code
 //let simpleDate;
-//TODO delete everything unnecessary
+
 const input = document.querySelector("#datepicker");
 const maxDate = new Date();
 maxDate.setDate(maxDate.getDate() + 7);
@@ -66,8 +66,8 @@ document.addEventListener("DOMContentLoaded", () => {
     datePicker.clear();
 
     var myDiv = document.getElementById("rooms");
-      myDiv.style.display = "none";
-
+    myDiv.style.display = "none";
+    resetImage();  
   });
 });
 
@@ -84,4 +84,12 @@ function changeImage(rectangleId, checkboxId) {
 
   var checkbox = document.getElementById(checkboxId);
   checkbox.checked = !checkbox.checked;
+}
+
+function resetImage() {
+  let images = document.getElementsByClassName("rectangle");
+  [...images].forEach(element => {
+    // Assuming the original source contains "green", replace it with "red"
+    element.src = element.src.replace("red", "green");
+  });
 }
