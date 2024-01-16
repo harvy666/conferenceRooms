@@ -1,6 +1,3 @@
-//controller feletti réteg?
-//const queries = require("./public/queries");
-//const studentRoutes = require("./public/routes");
 const moment = require('moment-timezone');
 const express = require("express");
 const path = require("path");
@@ -17,22 +14,18 @@ app.listen(port, () => console.log(`app listening on port ${port}`));
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
 
-
 //render rooms.pug on /rooms endpoint
 app.get("/rooms", (req, res) => {
   res.render("rooms");
 });
 
 //saving the checkboxes
-
 app.post("/rooms", (req, res) => {
   const { selectedDate, room1Cb, room2Cb, room3Cb, room4Cb } = req.body;
   const sqlQuery = `INSERT INTO rooms (reservation_date,room1,room2,room3,room4) VALUES ($1,$2,$3,$4,$5)
   ON CONFLICT (reservation_date)
   DO UPDATE SET room1 = $2, room2 = $3, room3 = $4, room4 = $5
   `;
-// console.log(selectedDate); // Output: YYYY-MM-DD
-  console.log("I was  server!")
   pool.query(
     sqlQuery,
     [selectedDate, room1Cb, room2Cb, room3Cb, room4Cb],
@@ -47,14 +40,10 @@ app.post("/rooms", (req, res) => {
   );
 });
 
-
 app.get("/rooms/data", (req, res) => {
   const { selectedDate } = req.query;
   // Convert the date string to 'YYYY-MM-DD' format
-  const formattedDate = moment(selectedDate).tz('Europe/Budapest').format('YYYY-MM-DD');
-  console.log('formated');
-  console.log(formattedDate);
-  
+  const formattedDate = moment(selectedDate).tz('Europe').format('YYYY-MM-DD');  
   const sqlQuery = `SELECT * FROM rooms WHERE reservation_date = $1`;
 
   pool.query(sqlQuery, [formattedDate], (error, results) => {

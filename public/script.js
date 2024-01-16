@@ -1,6 +1,3 @@
-//datepicker code
-//let simpleDate;
-
 const input = document.querySelector("#datepicker");
 const maxDate = new Date();
 maxDate.setDate(maxDate.getDate() + 7);
@@ -20,14 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
       if (selectedDates.length > 0) {
-        //const selectedDate = selectedDates[0].toISOString().split('T')[0];
-         const selectedDate = selectedDates[0].toLocaleDateString('hu-HU');
-        //const selectedDate = selectedDates[0].toISOString().split('T')[0];
-        console.log(selectedDate)
-    
-        //TODO MAIN put the fetch in a try catch/somehow deal with when there is no data with that date in the DB already 
-        //TODO mega MAIN http://localhost:3000/rooms/data/?selectedDate=2024.%2001.%2018.  asking for a wrong date!
-
+        const selectedDate = selectedDates[0].toLocaleDateString('hu-HU');
         fetch(`/rooms/data/?selectedDate=${selectedDate}`, {
           method: "GET",
           headers: {
@@ -51,26 +41,16 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("room3Cb").checked = data.room3;
     document.getElementById("room4Cb").checked = data.room4;
     }
-
-      //TODO  IF selecteddate not equal 0 then read in the corresponding value from the DB and set checkboxes/images
     },
   });
 
-  
-
-// Rest of your code...
-
-
   let form = document.getElementById("roomsForm");
-
   form.addEventListener("submit", (event) => {
     event.preventDefault();
-
     let room1Cb = document.getElementById("room1Cb").checked;
     let room2Cb = document.getElementById("room2Cb").checked;
     let room3Cb = document.getElementById("room3Cb").checked;
     let room4Cb = document.getElementById("room4Cb").checked;
-
     const selectedDate = document.getElementById("datepicker").value;
 
     let formData = {
@@ -101,9 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //hide everything again
     var myDiv = document.getElementById("rooms");
     myDiv.style.display = "none";
-    resetImage();
-    
-    //TODO reset selectedDate (if it exists here at all) so the onChange it does not fire again
+    resetImage();    
   });
 });
 
@@ -125,7 +103,6 @@ function changeImage(rectangleId, checkboxId) {
 function resetImage() {
   let images = document.getElementsByClassName("rectangle");
   [...images].forEach(element => {
-    // Assuming the original source contains "green", replace it with "red"
     element.src = element.src.replace("red", "green");
   });
 }
