@@ -1,6 +1,5 @@
 //datepicker code
 //let simpleDate;
-//TODO MAIN somehow the date picks 1 day before
 
 const input = document.querySelector("#datepicker");
 const maxDate = new Date();
@@ -21,9 +20,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
       if (selectedDates.length > 0) {
-        const selectedDate = selectedDates[0].toISOString().split('T')[0];
+        //const selectedDate = selectedDates[0].toISOString().split('T')[0];
+        const selectedDate = selectedDates[0].toLocaleDateString('hu-HU');
         console.log(selectedDate)
     
+        //TODO MAIN put the fetch in a try catch/somehow deal with when there is no data with that date in the DB already 
+
         fetch(`/rooms/data/?selectedDate=${selectedDate}`, {
           method: "GET",
           headers: {
