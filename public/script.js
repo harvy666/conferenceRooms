@@ -21,7 +21,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (selectedDates.length > 0) {
         //const selectedDate = selectedDates[0].toISOString().split('T')[0];
-        const selectedDate = selectedDates[0].toLocaleDateString('hu-HU');
+         const selectedDate = selectedDates[0].toLocaleDateString('hu-HU');
+        //const selectedDate = selectedDates[0].toISOString().split('T')[0];
         console.log(selectedDate)
     
         //TODO MAIN put the fetch in a try catch/somehow deal with when there is no data with that date in the DB already 

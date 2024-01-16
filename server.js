@@ -50,9 +50,11 @@ app.post("/rooms", (req, res) => {
 
 app.get("/rooms/data", (req, res) => {
   const { selectedDate } = req.query;
+  // Convert the date string to 'YYYY-MM-DD' format
+  const formattedDate = new Date(selectedDate).toISOString().split('T')[0];
   const sqlQuery = `SELECT * FROM rooms WHERE reservation_date = $1`;
 
-  pool.query(sqlQuery, [selectedDate], (error, results) => {
+  pool.query(sqlQuery, [formattedDate], (error, results) => {
     if (error) {
       console.error("Error fetching data:", error);
       res.status(500).send("Error fetching data");
