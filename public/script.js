@@ -1,5 +1,6 @@
 //datepicker code
 //let simpleDate;
+//TODO MAIN somehow the date picks 1 day before
 
 const input = document.querySelector("#datepicker");
 const maxDate = new Date();
@@ -18,9 +19,43 @@ document.addEventListener("DOMContentLoaded", () => {
       myDiv.style.display = "block";
       console.log("Changing!!!")
 
+
+      if (selectedDates.length > 0) {
+        const selectedDate = selectedDates[0].toISOString().split('T')[0];
+        console.log(selectedDate)
+    
+        fetch(`/rooms/data/?selectedDate=${selectedDate}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then(response => response.json())
+          .then(data => {
+            // Update checkboxes/images based on the data received from the server
+            updateCheckboxes(data);
+          })
+          .catch(error => {
+            console.error("Error fetching data:");
+          });
+      }
+        
+    function updateCheckboxes(data) {
+    // Update checkboxes/images based on the data received from the server
+    document.getElementById("room1Cb").checked = data.room1;
+    document.getElementById("room2Cb").checked = data.room2;
+    document.getElementById("room3Cb").checked = data.room3;
+    document.getElementById("room4Cb").checked = data.room4;
+    }
+
       //TODO  IF selecteddate not equal 0 then read in the corresponding value from the DB and set checkboxes/images
     },
   });
+
+  
+
+// Rest of your code...
+
 
   let form = document.getElementById("roomsForm");
 

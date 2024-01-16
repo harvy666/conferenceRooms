@@ -16,6 +16,8 @@ app.listen(port, () => console.log(`app listening on port ${port}`));
 //prints all rooms from Postgres to /rooms endpoint (using a PUG in views folder)
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
+
+
 //render rooms.pug on /rooms endpoint
 app.get("/rooms", (req, res) => {
   res.render("rooms");
@@ -43,4 +45,25 @@ app.post("/rooms", (req, res) => {
       }
     }
   );
+});
+
+
+app.get("/rooms/data", (req, res) => {
+  const { selectedDate } = req.query;
+  const sqlQuery = `SELECT * FROM rooms WHERE reservation_date = $1`;
+
+  pool.query(sqlQuery, [selectedDate], (error, results) => {
+    if (error) {
+      console.error("Error fetching data:", error);
+      res.status(500).send("Error fetching data");
+    } else {
+      if (results.rows.length > 0) {
+        // Send the data back to the client
+        res.json(results.rows[0]);
+      } else {
+        // Send an empty object if no data is found for the specified date
+        res.json({});
+      }
+    }
+  });
 });
