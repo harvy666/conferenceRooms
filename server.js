@@ -1,7 +1,7 @@
 //controller feletti réteg?
 //const queries = require("./public/queries");
 //const studentRoutes = require("./public/routes");
-
+const moment = require('moment-timezone');
 const express = require("express");
 const path = require("path");
 const pool = require("./db");
@@ -51,7 +51,10 @@ app.post("/rooms", (req, res) => {
 app.get("/rooms/data", (req, res) => {
   const { selectedDate } = req.query;
   // Convert the date string to 'YYYY-MM-DD' format
-  const formattedDate = new Date(selectedDate).toISOString().split('T')[0];
+  const formattedDate = moment(selectedDate).tz('Europe/Budapest').format('YYYY-MM-DD');
+  console.log('formated');
+  console.log(formattedDate);
+  
   const sqlQuery = `SELECT * FROM rooms WHERE reservation_date = $1`;
 
   pool.query(sqlQuery, [formattedDate], (error, results) => {
