@@ -17,7 +17,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
       if (selectedDates.length > 0) {
-        const selectedDate = selectedDates[0].toLocaleDateString('hu-HU');
+        //const selectedDate = selectedDates[0].toLocaleDateString('hu-HU');
+        const selectedDate = selectedDates[0].toLocaleDateString('hu-HU', { timeZone: 'Europe/Budapest' });
         fetch(`/rooms/data/?selectedDate=${selectedDate}`, {
           method: "GET",
           headers: {

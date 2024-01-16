@@ -42,8 +42,10 @@ app.post("/rooms", (req, res) => {
 
 app.get("/rooms/data", (req, res) => {
   const { selectedDate } = req.query;
-  // Convert the date string to 'YYYY-MM-DD' format
-  const formattedDate = moment(selectedDate).tz('Europe').format('YYYY-MM-DD');  
+  
+  //const formattedDate = moment(selectedDate).tz('Europe/Budapest').format('YYYY-MM-DD');
+  const formattedDate = moment(selectedDate, "YYYY. MM. DD.").format('YYYY-MM-DD');
+
   const sqlQuery = `SELECT * FROM rooms WHERE reservation_date = $1`;
 
   pool.query(sqlQuery, [formattedDate], (error, results) => {
