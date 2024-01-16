@@ -41,6 +41,11 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("room2Cb").checked = data.room2;
     document.getElementById("room3Cb").checked = data.room3;
     document.getElementById("room4Cb").checked = data.room4;
+
+    updateImages("room1Cb", "rectangle1");
+    updateImages("room2Cb", "rectangle2");
+    updateImages("room3Cb", "rectangle3");
+    updateImages("room4Cb", "rectangle4");
     }
     },
   });
@@ -107,3 +112,17 @@ function resetImage() {
     element.src = element.src.replace("red", "green");
   });
 }
+
+function updateImages(checkboxId, rectangleId) {
+  const checkbox = document.getElementById(checkboxId);
+  const rectangle = document.getElementById(rectangleId);
+
+  if (checkbox.checked) {
+    // If checkbox is checked, show red image
+    rectangle.src = rectangle.src.replace("green", "red");
+  } else {
+    // If checkbox is unchecked, show green image
+    rectangle.src = rectangle.src.replace("red", "green");
+  }
+}
+
