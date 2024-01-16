@@ -25,6 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log(selectedDate)
     
         //TODO MAIN put the fetch in a try catch/somehow deal with when there is no data with that date in the DB already 
+        //TODO mega MAIN http://localhost:3000/rooms/data/?selectedDate=2024.%2001.%2018.  asking for a wrong date!
 
         fetch(`/rooms/data/?selectedDate=${selectedDate}`, {
           method: "GET",
