@@ -3,6 +3,7 @@ const maxDate = new Date();
 maxDate.setDate(maxDate.getDate() + 7);
 
 
+
 document.addEventListener("DOMContentLoaded", () => {
   let datePicker = flatpickr("#datepicker", {
     locale: {
