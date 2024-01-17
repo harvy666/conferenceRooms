@@ -1,17 +1,14 @@
-const input = document.querySelector("#datepicker");
 const maxDate = new Date();
 maxDate.setDate(maxDate.getDate() + 7);
 
-
-
 document.addEventListener("DOMContentLoaded", () => {
-  let datePicker = flatpickr("#datepicker", {
+  let datePicker = flatpickr("#datepicker", { 
     locale: {
       firstDayOfWeek: 1,
     },
     minDate: "today",
     maxDate: maxDate,
-    onChange: function (selectedDates, dateStr, instance) {
+    onChange: function (selectedDates) {
       var myDiv = document.getElementById("rooms");
       myDiv.style.display = "block";
       console.log("Changing!!!")
@@ -31,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
             // Update checkboxes/images based on the data received from the server
             updateCheckboxes(data);
           })
-          .catch(error => {
+          .catch(error => {  
             console.error("Error fetching data:");
           });
       }
@@ -92,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-function changeImage(rectangleId, checkboxId) {
+function changeImage(rectangleId, checkboxId) { // eslint-disable-line no-unused-vars
   var image = document.getElementById(rectangleId);
   var redSource = image.src.replace("green", "red");
   var greenSource = image.src.replace("red", "green");

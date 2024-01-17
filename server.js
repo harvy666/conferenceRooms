@@ -8,11 +8,11 @@ const port = 3000;
 // incoming  json parsing (accessible on the req.body later?)
 app.use(express.json());
 //add static files
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join("public")));
 app.listen(port, () => console.log(`app listening on port ${port}`));
 //prints all rooms from Postgres to /rooms endpoint (using a PUG in views folder)
 app.set("view engine", "pug");
-app.set("views", path.join(__dirname, "views"));
+app.set("views", path.join("views"));
 
 //render rooms.pug on /rooms endpoint
 app.get("/rooms", (req, res) => {
@@ -29,7 +29,7 @@ app.post("/rooms", (req, res) => {
   pool.query(
     sqlQuery,
     [selectedDate, room1Cb, room2Cb, room3Cb, room4Cb],
-    (error, results) => {
+    (error, results) => {  // eslint-disable-line no-unused-vars
       if (error) {
         console.error("Error saving checkbox state:", error);
         res.status(500).send("Error saving checkbox state");
@@ -63,3 +63,4 @@ app.get("/rooms/data", (req, res) => {
     }
   });
 });
+
