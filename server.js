@@ -69,8 +69,8 @@ app.get("/rooms/data", (req, res) => {
 
 
 app.get("/rooms/days", (req, res) => {
-  const sqlQuery = 'SELECT TO_CHAR(reservation_date, \'YYYY-MM-DD\') AS formatted_date FROM rooms';
-
+ 
+  const sqlQuery = `SELECT * FROM rooms`;
   pool.query(sqlQuery, (error, results) => {
     if (error) {
       console.error("Error fetching data:", error);
