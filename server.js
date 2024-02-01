@@ -69,6 +69,8 @@ app.get("/rooms/data", (req, res) => {
 app.get("/rooms/days", (req, res) => {
  
   const sqlQuery = `SELECT * FROM rooms`;
+  //const sqlQuery = 'SELECT NOW() as current_timestamp';
+  
   pool.query(sqlQuery, (error, results) => {
     if (error) {
       console.error("Error fetching data:", error);
