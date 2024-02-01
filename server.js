@@ -77,7 +77,7 @@ app.get("/rooms/days", (req, res) => {
       if (results.rows.length > 0) {
         // Send the data back to the client
         res.json(results.rows);
-        console.log(res.json(results.rows));
+        console.log((results.rows));
       } else {
         // Send an empty object if no data is found for the specified date
         res.json({});
