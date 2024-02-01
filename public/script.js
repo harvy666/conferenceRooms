@@ -124,3 +124,23 @@ function updateImages(checkboxId, rectangleId) {
   }
 }
 
+
+async function showDays() {
+  try {
+      const response = await fetch('/rooms/days/', {
+          method: 'GET', // Change to GET request
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          // Add any data needed for the request body
+      });
+
+      const data = await response.json();
+      // Now 'data' contains the result of your query
+      console.log(data);
+
+      // Handle the data as needed (update UI, etc.)
+  } catch (error) {
+      console.error('Error:', error);
+  }
+}
