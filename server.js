@@ -69,8 +69,8 @@ app.get("/rooms/data", (req, res) => {
 
 
 app.get("/rooms/days", (req, res) => {
- 
-  const sqlQuery = `SELECT * FROM rooms`;
+  const sqlQuery = 'SELECT TO_CHAR(reservation_date, \'YYYY-MM-DD\') AS formatted_date FROM rooms';
+
   pool.query(sqlQuery, (error, results) => {
     if (error) {
       console.error("Error fetching data:", error);
@@ -90,24 +90,3 @@ app.get("/rooms/days", (req, res) => {
 });
 
 
-// app.get("/rooms/days", (req, res) => {
-//   const sqlQuery = 'SELECT reservation_date FROM rooms';
-
-//   pool.query(sqlQuery, (error, results) => {
-//     if (error) {
-//       console.error("Error fetching data:", error);
-//       res.status(500).send("Error fetching data");
-//     } else {
-//       if (results.rows.length > 0) {
-//         // Convert timestamps to strings in the desired format (e.g., 'YYYY-MM-DD')
-//         const formattedDates = results.rows.map(row => row.reservation_date.toISOString().split('T')[0]);
-
-//         res.json(formattedDates);
-//         console.log(formattedDates);
-//       } else {
-//         // Send an empty array if no data is found
-//         res.json([]);
-//       }
-//     }
-//   });
-// });
