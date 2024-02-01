@@ -23,3 +23,8 @@ button[type="submit"] {
     font-size: 16px; 
 }
 
+
+
+#datepicker {
+    display: inline-block; /* Make the input inline */
+}

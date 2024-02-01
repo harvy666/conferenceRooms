@@ -56,6 +56,28 @@ app.get("/rooms/data", (req, res) => {
       if (results.rows.length > 0) {
         // Send the data back to the client
         res.json(results.rows[0]);
+        
+      } else {
+        // Send an empty object if no data is found for the specified date
+        res.json({});
+      }
+    }
+  });
+});
+
+
+app.get("/rooms/days", (req, res) => {
+ 
+  const sqlQuery = `SELECT * FROM rooms`;
+  pool.query(sqlQuery, (error, results) => {
+    if (error) {
+      console.error("Error fetching data:", error);
+      res.status(500).send("Error fetching data");
+    } else {
+      if (results.rows.length > 0) {
+        // Send the data back to the client
+        res.json(results.rows);
+        console.log(res.json(results.rows));
       } else {
         // Send an empty object if no data is found for the specified date
         res.json({});
