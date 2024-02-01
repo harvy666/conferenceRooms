@@ -1,6 +1,8 @@
 const maxDate = new Date();
 maxDate.setDate(maxDate.getDate() + 7);
 
+
+//TODO change flatpicker timezone?
 document.addEventListener("DOMContentLoaded", () => {
   let datePicker = flatpickr("#datepicker", { 
     locale: {
