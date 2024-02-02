@@ -2,7 +2,7 @@ const maxDate = new Date();
 maxDate.setDate(maxDate.getDate() + 7);
 
 
-//TODO change flatpicker timezone?
+//TODO dinamically change BG color of weekdays if I change back to all green on a selected date
 document.addEventListener("DOMContentLoaded", () => {
   let datePicker = flatpickr("#datepicker", { 
     locale: {
@@ -87,7 +87,8 @@ document.addEventListener("DOMContentLoaded", () => {
     //hide everything again
     var myDiv = document.getElementById("rooms");
     myDiv.style.display = "none";
-    resetImage();    
+    resetImage(); 
+    showDays();   
   });
 });
 
@@ -218,7 +219,7 @@ async function showDays() {
       const data = await response.json();
       console.log(data);
 
-      for (var i = 1; i < 9; i++) {
+      for (var i = 0; i < 8; i++) {
           var date = new Date();
           date.setDate(date.getDate() + i);
 
