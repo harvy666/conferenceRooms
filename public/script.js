@@ -1,6 +1,8 @@
 const maxDate = new Date();
 maxDate.setDate(maxDate.getDate() + 7);
 
+
+//TODO dinamically change BG color of weekdays if I change back to all green on a selected date
 document.addEventListener("DOMContentLoaded", () => {
   let datePicker = flatpickr("#datepicker", { 
     locale: {
@@ -85,7 +87,8 @@ document.addEventListener("DOMContentLoaded", () => {
     //hide everything again
     var myDiv = document.getElementById("rooms");
     myDiv.style.display = "none";
-    resetImage();    
+    resetImage(); 
+    showDays();   
   });
 });
 
@@ -121,6 +124,122 @@ function updateImages(checkboxId, rectangleId) {
   } else {
     // If checkbox is unchecked, show green image
     rectangle.src = rectangle.src.replace("red", "green");
+  }
+}
+
+
+// async function showDays() {
+
+//   var datesContainer = document.getElementById("datesContainer");
+//     datesContainer.innerHTML = ""; // Clear previous content
+
+   
+
+//   try {
+//       const response = await fetch('/rooms/days/', {
+//           method: 'GET', // Change to GET request
+//           headers: {
+//               'Content-Type': 'application/json',
+//           },
+//           // Add any data needed for the request body
+//       });
+
+//       const data = await response.json();
+//       // Now 'data' contains the result of your query
+//       console.log(data);
+
+//       // Handle the data as needed (update UI, etc.)
+//   } catch (error) {
+//       console.error('Error:', error);
+//   }
+
+//   for (var i = 0; i < 7; i++) {
+//     var date = new Date();
+//     date.setDate(date.getDate() + i);
+
+//     var dateString = date.toISOString().split('T')[0];
+    
+
+//     var dateElement = document.createElement("span");
+//     dateElement.textContent = dateString;
+//     datesContainer.appendChild(dateElement);
+// }
+// }
+
+// async function showDays() {
+//   var datesContainer = document.getElementById("datesContainer");
+//   datesContainer.innerHTML = ""; // Clear previous content
+
+//   try {
+//       const response = await fetch('/rooms/days/', {
+//           method: 'GET',
+//           headers: {
+//               'Content-Type': 'application/json',
+//           },
+//       });
+
+//       const data = await response.json();
+//       console.log(data);
+
+//       for (var i = 1; i < 9; i++) {
+//           var date = new Date();
+//           date.setDate(date.getDate() + i);
+
+//           var dateString = date.toISOString().split('T')[0];
+
+//           var dateElement = document.createElement("span");
+//           dateElement.textContent = dateString;
+
+//           // Check if the date is in the data
+//           if (data.includes(dateString)) {
+//               dateElement.style.backgroundColor = "red";
+//           } else {
+//               dateElement.style.backgroundColor = "green";
+//           }
+
+//           datesContainer.appendChild(dateElement);
+//       }
+//   } catch (error) {
+//       console.error('Error:', error);
+//   }
+// }
+
+async function showDays() {
+  var datesContainer = document.getElementById("datesContainer");
+  datesContainer.innerHTML = ""; // Clear previous content
+
+  try {
+      const response = await fetch('/rooms/days/', {
+          method: 'GET',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+      });
+
+      const data = await response.json();
+      console.log(data);
+
+      for (var i = 0; i < 8; i++) {
+          var date = new Date();
+          date.setDate(date.getDate() + i);
+
+          var dateString = date.toISOString().split('T')[0];
+
+          var dateElement = document.createElement("div");
+          dateElement.textContent = dateString;
+          dateElement.className = "dateButton"; // Apply a class for styling
+
+          // Check if the date is in the data
+          if (data.includes(dateString)) {
+              dateElement.style.backgroundColor = "red";
+          } else {
+              dateElement.style.backgroundColor = "green";
+          }
+
+          datesContainer.appendChild(dateElement);
+      }
+  } catch (error) {
+      console.error('Error:', error);
   }
 }
 
