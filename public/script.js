@@ -127,6 +127,7 @@ function updateImages(checkboxId, rectangleId) {
   }
 }
 //TODO db based coloring
+//TODO fix this annoying -1 hour/-1day problem!!!!! Example  formatted_date: '2024-02-07',reservation_date: 2024-02-06T23:00:00.000Z,
 async function showDays() {
   var datesContainer = document.getElementById("datesContainer");
   datesContainer.innerHTML = ""; // Clear previous content
