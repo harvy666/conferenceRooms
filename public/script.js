@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (selectedDates.length > 0) {
         //const selectedDate = selectedDates[0].toLocaleDateString('hu-HU');
-        const selectedDate = selectedDates[0].toLocaleDateString('hu-HU', { timeZone: 'Europe/Budapest' });
+        const selectedDate = selectedDates[0].toLocaleDateString('hu-HU', { timeZone: 'UTC' });
         fetch(`/rooms/data/?selectedDate=${selectedDate}`, {
           method: "GET",
           headers: {
@@ -141,17 +141,18 @@ async function showDays() {
       });
 
       const data = await response.json();
-      //console.log(data);
+      console.log(data);
 
       for (var i = 0; i < 8; i++) {
         var date = new Date();
         date.setDate(date.getDate() + i);
+        console.log('starting date  '+date);
         var dateString = date.toISOString().split('T')[0];
-        dateString = dateString.substring(0, 10); // Keep only YYYY-MM-DD part
+        console.log('middate  '+dateString);
         var dateElement = document.createElement("div");
         dateElement.textContent = dateString;
         dateElement.className = "dateButton"; // Apply a class for styling
-        var rowData = data.find(item => item.reservation_date === dateString);
+        var rowData = data.find(item => item.formatted_date === dateString);
       
         console.log(`Date: ${dateString}, Row Data:`, rowData);
       
@@ -160,13 +161,11 @@ async function showDays() {
           // Check conditions for setting background color based on room values
           if (rowData.room1 && rowData.room2 && rowData.room3 && rowData.room4) {
             dateElement.style.backgroundColor = "red";
-          } else if (!rowData.room1 && !rowData.room2 && !rowData.room3 && !rowData.room4) {
-            dateElement.style.backgroundColor = "green";
-          } else {
-            dateElement.style.backgroundColor = "yellow";
+          }  else if (!rowData.room1 || !rowData.room2 || !rowData.room3 || !rowData.room4){
+            dateElement.style.backgroundColor = "orange"; 
           }
         } else {
-          dateElement.style.backgroundColor = "gray"; // Handle the case when the date is not found in the data
+          dateElement.style.backgroundColor = "green"; // Handle the case when the date is not found in the data
         }
       
         datesContainer.appendChild(dateElement);
