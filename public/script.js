@@ -126,7 +126,7 @@ function updateImages(checkboxId, rectangleId) {
     rectangle.src = rectangle.src.replace("red", "green");
   }
 }
-
+//TODO db based coloring
 async function showDays() {
   var datesContainer = document.getElementById("datesContainer");
   datesContainer.innerHTML = ""; // Clear previous content
@@ -143,24 +143,34 @@ async function showDays() {
       //console.log(data);
 
       for (var i = 0; i < 8; i++) {
-          var date = new Date();
-          date.setDate(date.getDate() + i);
-
-          var dateString = date.toISOString().split('T')[0];
-
-          var dateElement = document.createElement("div");
-          dateElement.textContent = dateString;
-          dateElement.className = "dateButton"; // Apply a class for styling
-
-          // Check if the date is in the data
-          if (data.includes(dateString)) {
-              dateElement.style.backgroundColor = "red";
+        var date = new Date();
+        date.setDate(date.getDate() + i);
+        var dateString = date.toISOString().split('T')[0];
+        dateString = dateString.substring(0, 10); // Keep only YYYY-MM-DD part
+        var dateElement = document.createElement("div");
+        dateElement.textContent = dateString;
+        dateElement.className = "dateButton"; // Apply a class for styling
+        var rowData = data.find(item => item.reservation_date === dateString);
+      
+        console.log(`Date: ${dateString}, Row Data:`, rowData);
+      
+        // Check if the date is in the data
+        if (rowData) {
+          // Check conditions for setting background color based on room values
+          if (rowData.room1 && rowData.room2 && rowData.room3 && rowData.room4) {
+            dateElement.style.backgroundColor = "red";
+          } else if (!rowData.room1 && !rowData.room2 && !rowData.room3 && !rowData.room4) {
+            dateElement.style.backgroundColor = "green";
           } else {
-              dateElement.style.backgroundColor = "green";
+            dateElement.style.backgroundColor = "yellow";
           }
-
-          datesContainer.appendChild(dateElement);
+        } else {
+          dateElement.style.backgroundColor = "gray"; // Handle the case when the date is not found in the data
+        }
+      
+        datesContainer.appendChild(dateElement);
       }
+      
   } catch (error) {
       console.error('Error:', error);
   }
