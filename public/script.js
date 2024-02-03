@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (selectedDates.length > 0) {
         //const selectedDate = selectedDates[0].toLocaleDateString('hu-HU');
-        const selectedDate = selectedDates[0].toLocaleDateString('hu-HU', { timeZone: 'UTC' });
+        const selectedDate = selectedDates[0].toLocaleDateString('hu-HU', { timeZone: 'Europe/Budapest' });
         console.log(selectedDate);
         
         fetch(`/rooms/data/?selectedDate=${selectedDate}`, {
@@ -83,8 +83,8 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("room3Cb").checked = false;
     document.getElementById("room4Cb").checked = false;
     // Set minDate and maxDate options again after clearing the date picker
-    datePicker.set("minDate", "today");
-    datePicker.set("maxDate", maxDate);
+    // datePicker.set("minDate", "today");
+    // datePicker.set("maxDate", maxDate);
     datePicker.clear();
     //hide everything again
     var myDiv = document.getElementById("rooms");
