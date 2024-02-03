@@ -20,24 +20,38 @@ app.get("/rooms", (req, res) => {
 });
 
 //saving the checkboxes
-app.post("/rooms", (req, res) => {
-  const { selectedDate, room1Cb, room2Cb, room3Cb, room4Cb } = req.body;
-  const sqlQuery = `INSERT INTO rooms (reservation_date,room1,room2,room3,room4) VALUES ($1,$2,$3,$4,$5)
-  ON CONFLICT (reservation_date)
-  DO UPDATE SET room1 = $2, room2 = $3, room3 = $4, room4 = $5
-  `;
-  pool.query(
-    sqlQuery,
-    [selectedDate, room1Cb, room2Cb, room3Cb, room4Cb],
-    (error, results) => {  // eslint-disable-line no-unused-vars
-      if (error) {
-        console.error("Error saving checkbox state:", error);
-        res.status(500).send("Error saving checkbox state");
-      } else {
-        res.send("Checkbox state saved successfully");
-      }
+app.post("/rooms", async (req, res) => {
+  try {
+    const { selectedDate, room1Cb, room2Cb, room3Cb, room4Cb } = req.body;
+
+    // Convert selectedDate to UTC and format as 'YYYY-MM-DD'
+    const formattedDate = new Date(selectedDate).toISOString().split('T')[0];
+
+    const sqlQuery = `
+      INSERT INTO rooms (reservation_date, room1, room2, room3, room4)
+      VALUES ($1, $2, $3, $4, $5)
+      ON CONFLICT (reservation_date)
+      DO UPDATE SET
+        room1 = $2,
+        room2 = $3,
+        room3 = $4,
+        room4 = $5
+    `;
+
+    const values = [formattedDate, room1Cb, room2Cb, room3Cb, room4Cb];
+
+    const result = await pool.query(sqlQuery, values);
+
+    // Check if any rows were affected by the query
+    if (result.rowCount > 0) {
+      res.send("Checkbox state saved successfully");
+    } else {
+      res.status(500).send("Error saving checkbox state");
     }
-  );
+  } catch (error) {
+    console.error("Error saving checkbox state:", error);
+    res.status(500).send("Error saving checkbox state");
+  }
 });
 
 app.get("/rooms/data", (req, res) => {
@@ -78,9 +92,9 @@ app.get("/rooms/days", (req, res) => {
     } else {
       if (results.rows.length > 0) {
         // Extract formatted dates and send them to the client
-        const formattedDates = results.rows.map(row => row.formatted_date);
-        res.json(formattedDates);
-        console.log(formattedDates);
+        //const formattedDates = results.rows.map(row => row.formatted_date);
+        res.json(results.rows);
+        //console.log(formattedDates);
         console.log(results.rows);
         
       } else {

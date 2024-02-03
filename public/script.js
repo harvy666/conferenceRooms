@@ -1,7 +1,7 @@
 const maxDate = new Date();
 maxDate.setDate(maxDate.getDate() + 7);
 
-
+//TODO fontos rossz a kirajzolas a Rooms alatt a 4 doboznal a tobbi jo!
 //TODO dinamically change BG color of weekdays if I change back to all green on a selected date
 document.addEventListener("DOMContentLoaded", () => {
   let datePicker = flatpickr("#datepicker", { 
@@ -19,6 +19,8 @@ document.addEventListener("DOMContentLoaded", () => {
       if (selectedDates.length > 0) {
         //const selectedDate = selectedDates[0].toLocaleDateString('hu-HU');
         const selectedDate = selectedDates[0].toLocaleDateString('hu-HU', { timeZone: 'Europe/Budapest' });
+        console.log(selectedDate);
+        
         fetch(`/rooms/data/?selectedDate=${selectedDate}`, {
           method: "GET",
           headers: {
@@ -81,8 +83,8 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("room3Cb").checked = false;
     document.getElementById("room4Cb").checked = false;
     // Set minDate and maxDate options again after clearing the date picker
-    datePicker.set("minDate", "today");
-    datePicker.set("maxDate", maxDate);
+    // datePicker.set("minDate", "today");
+    // datePicker.set("maxDate", maxDate);
     datePicker.clear();
     //hide everything again
     var myDiv = document.getElementById("rooms");
@@ -126,7 +128,8 @@ function updateImages(checkboxId, rectangleId) {
     rectangle.src = rectangle.src.replace("red", "green");
   }
 }
-
+//TODO db based coloring
+//TODO fix this annoying -1 hour/-1day problem!!!!! Example  formatted_date: '2024-02-07',reservation_date: 2024-02-06T23:00:00.000Z,
 async function showDays() {
   var datesContainer = document.getElementById("datesContainer");
   datesContainer.innerHTML = ""; // Clear previous content
@@ -140,27 +143,36 @@ async function showDays() {
       });
 
       const data = await response.json();
-      //console.log(data);
+      console.log(data);
 
       for (var i = 0; i < 8; i++) {
-          var date = new Date();
-          date.setDate(date.getDate() + i);
-
-          var dateString = date.toISOString().split('T')[0];
-
-          var dateElement = document.createElement("div");
-          dateElement.textContent = dateString;
-          dateElement.className = "dateButton"; // Apply a class for styling
-
-          // Check if the date is in the data
-          if (data.includes(dateString)) {
-              dateElement.style.backgroundColor = "red";
-          } else {
-              dateElement.style.backgroundColor = "green";
+        var date = new Date();
+        date.setDate(date.getDate() + i);
+        console.log('starting date  '+date);
+        var dateString = date.toISOString().split('T')[0];
+        console.log('middate  '+dateString);
+        var dateElement = document.createElement("div");
+        dateElement.textContent = dateString;
+        dateElement.className = "dateButton"; // Apply a class for styling
+        var rowData = data.find(item => item.formatted_date === dateString);
+      
+        console.log(`Date: ${dateString}, Row Data:`, rowData);
+      
+        // Check if the date is in the data
+        if (rowData) {
+          // Check conditions for setting background color based on room values
+          if (rowData.room1 && rowData.room2 && rowData.room3 && rowData.room4) {
+            dateElement.style.backgroundColor = "red";
+          }  else if (!rowData.room1 || !rowData.room2 || !rowData.room3 || !rowData.room4){
+            dateElement.style.backgroundColor = "orange"; 
           }
-
-          datesContainer.appendChild(dateElement);
+        } else {
+          dateElement.style.backgroundColor = "green"; // Handle the case when the date is not found in the data
+        }
+      
+        datesContainer.appendChild(dateElement);
       }
+      
   } catch (error) {
       console.error('Error:', error);
   }
