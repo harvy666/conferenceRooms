@@ -69,7 +69,7 @@ app.get("/rooms/data", (req, res) => {
 
 
 app.get("/rooms/days", (req, res) => {
-  const sqlQuery = 'SELECT TO_CHAR(reservation_date, \'YYYY-MM-DD\') AS formatted_date FROM rooms';
+  const sqlQuery = 'SELECT TO_CHAR(reservation_date, \'YYYY-MM-DD\') AS formatted_date,room1,room2,room3,room4 FROM rooms';
 
   pool.query(sqlQuery, (error, results) => {
     if (error) {
@@ -81,6 +81,8 @@ app.get("/rooms/days", (req, res) => {
         const formattedDates = results.rows.map(row => row.formatted_date);
         res.json(formattedDates);
         console.log(formattedDates);
+        console.log(results.rows);
+        
       } else {
         // Send an empty array if no data is found
         res.json([]);

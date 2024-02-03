@@ -140,7 +140,7 @@ async function showDays() {
       });
 
       const data = await response.json();
-      console.log(data);
+      //console.log(data);
 
       for (var i = 0; i < 8; i++) {
           var date = new Date();
