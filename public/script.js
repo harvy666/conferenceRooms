@@ -1,7 +1,7 @@
 const maxDate = new Date();
 maxDate.setDate(maxDate.getDate() + 7);
 
-
+//TODO fontos rossz a kirajzolas a Rooms alatt a 4 doboznal a tobbi jo!
 //TODO dinamically change BG color of weekdays if I change back to all green on a selected date
 document.addEventListener("DOMContentLoaded", () => {
   let datePicker = flatpickr("#datepicker", { 
@@ -19,6 +19,8 @@ document.addEventListener("DOMContentLoaded", () => {
       if (selectedDates.length > 0) {
         //const selectedDate = selectedDates[0].toLocaleDateString('hu-HU');
         const selectedDate = selectedDates[0].toLocaleDateString('hu-HU', { timeZone: 'UTC' });
+        console.log(selectedDate);
+        
         fetch(`/rooms/data/?selectedDate=${selectedDate}`, {
           method: "GET",
           headers: {
