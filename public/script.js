@@ -1,8 +1,7 @@
 const maxDate = new Date();
 maxDate.setDate(maxDate.getDate() + 7);
 
-//TODO fontos rossz a kirajzolas a Rooms alatt a 4 doboznal a tobbi jo!
-//TODO dinamically change BG color of weekdays if I change back to all green on a selected date
+//TODO add week selection 
 document.addEventListener("DOMContentLoaded", () => {
   let datePicker = flatpickr("#datepicker", { 
     locale: {
