@@ -19,6 +19,10 @@ app.get('/rooms', (req, res) => {
   res.render('rooms')
 })
 
+app.get('/', (req, res) => {
+  res.render('home')
+})
+
 // saving the checkboxes
 app.post('/rooms', async (req, res) => {
   try {
